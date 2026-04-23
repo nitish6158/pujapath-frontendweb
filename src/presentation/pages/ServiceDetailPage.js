@@ -44,15 +44,24 @@ function ServiceDetailPage({ item, onBack, onBook, t, text }) {
 
           <section>
             <h2>{t('pujaDescription')}</h2>
-            <p>
-              {text(item.summary)} {t('aboutText')}
-            </p>
+            <p>{text(item.description) || text(item.summary)}</p>
             <ul className="benefit-list">
               {(text(item.benefits) || []).map((benefit) => (
                 <li key={benefit}>{benefit}</li>
               ))}
             </ul>
           </section>
+
+          {text(item.detailMessages)?.length ? (
+            <section>
+              <h2>{t('importantDetails')}</h2>
+              <ul className="detail-message-list">
+                {text(item.detailMessages).map((message) => (
+                  <li key={message}>{message}</li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
         </article>
 
         <aside className="detail-sidebar">

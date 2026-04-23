@@ -3,6 +3,9 @@ import { useBookingFlow } from './application/hooks/useBookingFlow';
 import { useTranslation } from './application/hooks/useTranslation';
 import {
   astrologyServices,
+  astrologyExperts,
+  astrologyFlow,
+  astrologyTopics,
   blogs,
   bookingHighlights,
   heroSlides,
@@ -10,10 +13,14 @@ import {
   videos,
 } from './domain/content';
 import Header from './presentation/components/Header';
+import AstrologyPage from './presentation/pages/AstrologyPage';
+import BlogsPage from './presentation/pages/BlogsPage';
 import BookingPage from './presentation/pages/BookingPage';
 import ContactPage from './presentation/pages/ContactPage';
 import HomePage from './presentation/pages/HomePage';
 import ServiceDetailPage from './presentation/pages/ServiceDetailPage';
+import ServicesPage from './presentation/pages/ServicesPage';
+import VideosPage from './presentation/pages/VideosPage';
 import './App.css';
 
 function App() {
@@ -30,9 +37,7 @@ function App() {
 
   const navigateTo = (target) => {
     setCurrentPage(target);
-    window.requestAnimationFrame(() => {
-      document.getElementById(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const showDetails = (item) => {
@@ -71,7 +76,7 @@ function App() {
         language={language}
         languages={languages}
         onLanguageChange={setLanguage}
-        onNavigate={(target) => (target === 'contact' ? setCurrentPage('contact') : navigateTo(target))}
+        onNavigate={navigateTo}
         t={t}
       />
 
@@ -89,6 +94,39 @@ function App() {
             videos={videos}
             {...commonPageProps}
           />
+        ) : null}
+
+        {currentPage === 'services' ? (
+          <ServicesPage
+            onBook={startBooking}
+            onDetails={showDetails}
+            services={serviceCategories}
+            {...commonPageProps}
+          />
+        ) : null}
+
+        {currentPage === 'astrology' ? (
+          <AstrologyPage
+            astrologyServices={astrologyServices}
+            astrologyExperts={astrologyExperts}
+            astrologyFlow={astrologyFlow}
+            astrologyTopics={astrologyTopics}
+            onBook={startBooking}
+            onDetails={showDetails}
+            {...commonPageProps}
+          />
+        ) : null}
+
+        {currentPage === 'videos' ? (
+          <VideosPage
+            onBook={startBooking}
+            videos={videos}
+            {...commonPageProps}
+          />
+        ) : null}
+
+        {currentPage === 'blogs' ? (
+          <BlogsPage blogs={blogs} onBook={startBooking} {...commonPageProps} />
         ) : null}
 
         {currentPage === 'details' ? (

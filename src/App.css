@@ -255,6 +255,7 @@ button {
 
 .hero-content {
   width: min(720px, 100%);
+  animation: heroTextIn 720ms ease both;
 }
 
 .hero-symbol {
@@ -316,21 +317,64 @@ button {
   display: grid;
   place-items: end center;
   min-height: 360px;
+  animation: heroImageIn 900ms ease 180ms both;
 }
 
-.hero-figure img {
-  width: min(100%, 430px);
-  max-height: 380px;
-  object-fit: contain;
-  filter: drop-shadow(0 24px 30px rgba(89, 28, 4, 0.25));
+.hero-figure img,
+.hero-figure iframe {
+  width: min(100%, 500px);
+  aspect-ratio: 1 / 1;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   transition:
     filter 180ms ease,
     transform 180ms ease;
 }
 
+.hero-figure img {
+  object-fit: contain;
+  filter: drop-shadow(0 28px 30px rgba(89, 28, 4, 0.28));
+}
+
+.hero-figure iframe {
+  aspect-ratio: 16 / 9;
+  border: 8px solid rgba(255, 255, 255, 0.72);
+  border-radius: 8px;
+  background: #100a05;
+  box-shadow: 0 24px 44px rgba(89, 28, 4, 0.24);
+}
+
 .hero-figure:hover img {
-  filter: drop-shadow(0 30px 36px rgba(89, 28, 4, 0.34));
+  filter: drop-shadow(0 34px 38px rgba(89, 28, 4, 0.36));
   transform: translateY(-6px) scale(1.02);
+}
+
+.hero-figure:hover iframe {
+  box-shadow: 0 30px 54px rgba(89, 28, 4, 0.32);
+  transform: translateY(-6px) scale(1.02);
+}
+
+@keyframes heroTextIn {
+  from {
+    opacity: 0;
+    transform: translateX(-42px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes heroImageIn {
+  from {
+    opacity: 0;
+    transform: translateX(54px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 .slider-arrow {
@@ -489,7 +533,7 @@ button {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px;
   max-width: 1180px;
-  margin: -62px auto 8px;
+  margin: -18px auto 8px;
   padding: 0 clamp(18px, 5vw, 0px);
 }
 
@@ -584,6 +628,72 @@ button {
   margin-bottom: 22px;
 }
 
+.section-title-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.section-title-row .section-header {
+  margin-bottom: 18px;
+}
+
+.page-screen {
+  min-height: 62vh;
+}
+
+.search-bar {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  align-items: center;
+  width: min(620px, 100%);
+  margin: 0 0 24px;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 14px 30px rgba(65, 38, 18, 0.08);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.search-bar:focus-within,
+.search-bar:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(185, 20, 53, 0.1);
+}
+
+.search-bar span {
+  display: grid;
+  place-items: center;
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.search-bar input {
+  min-height: 48px;
+  width: 100%;
+  padding: 12px 14px 12px 0;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.empty-state {
+  margin: 22px 0 0;
+  padding: 16px;
+  color: var(--muted);
+  background: #fff8e9;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-weight: 800;
+}
+
 .section-header h2 {
   margin: 0;
   font-family: Georgia, 'Times New Roman', serif;
@@ -598,8 +708,8 @@ button {
 
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
 }
 
 .single-row {
@@ -628,6 +738,11 @@ button {
   transform: translateY(-5px);
 }
 
+.card-image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
 .content-card img {
   width: 100%;
   aspect-ratio: 16 / 10;
@@ -644,7 +759,7 @@ button {
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 18px;
+  padding: 20px;
 }
 
 .content-card h3 {
@@ -662,7 +777,23 @@ button {
 }
 
 .content-card .card-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
   margin-top: auto;
+}
+
+.content-card .card-actions .primary-button,
+.content-card .card-actions .ghost-button {
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 8px;
+  overflow: hidden;
+  font-size: 0.82rem;
+  line-height: 1.2;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .meta-grid,
@@ -911,6 +1042,221 @@ dd {
   border: 0;
 }
 
+.astrology-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+  gap: clamp(24px, 5vw, 56px);
+  align-items: center;
+  padding: clamp(44px, 7vw, 86px) clamp(18px, 5vw, 72px);
+  background:
+    radial-gradient(circle at 92% 20%, rgba(247, 166, 0, 0.2), transparent 28%),
+    linear-gradient(135deg, #fff7df, #fffaf1 46%, #ffffff);
+}
+
+.astrology-hero-copy {
+  display: grid;
+  gap: 16px;
+  justify-items: start;
+}
+
+.astrology-hero h1 {
+  margin: 0;
+  max-width: 780px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(2rem, 4.2vw, 3.65rem);
+  line-height: 1.08;
+  text-transform: uppercase;
+}
+
+.astrology-hero p:not(.eyebrow) {
+  max-width: 720px;
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.astro-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.astro-trust-row span,
+.astro-topic-grid button {
+  padding: 10px 12px;
+  color: var(--primary-dark);
+  background: #fff2dc;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-weight: 900;
+}
+
+.astro-form {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.astro-form h2 {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.astro-form label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.astro-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.astro-form input,
+.astro-form textarea {
+  width: 100%;
+  padding: 12px;
+  color: var(--text);
+  background: #fffdf8;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.astro-form input:focus,
+.astro-form textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(185, 20, 53, 0.12);
+  outline: none;
+}
+
+.astro-topic-grid,
+.astro-flow-grid,
+.astro-expert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.astro-topic-grid button {
+  min-height: 58px;
+  border-radius: 8px;
+}
+
+.astro-topic-grid button:hover,
+.astro-topic-grid button:focus-visible {
+  color: #ffffff;
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.astro-flow-card,
+.astro-expert-card {
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.astro-flow-card span,
+.expert-avatar {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: #ffffff;
+  background: var(--primary);
+  border-radius: 50%;
+  font-weight: 900;
+}
+
+.astro-flow-card h3,
+.astro-expert-card h3 {
+  margin: 16px 0 8px;
+}
+
+.astro-flow-card p,
+.astro-expert-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.astro-expert-card dl {
+  display: grid;
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.astrology-promo {
+  position: relative;
+  display: block;
+  width: min(920px, 100%);
+  padding: 0;
+  overflow: hidden;
+  color: #ffffff;
+  background: #2b170c;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+
+.astrology-promo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+  opacity: 0.86;
+  transition: transform 220ms ease;
+}
+
+.astrology-promo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(36, 25, 15, 0.72), rgba(36, 25, 15, 0.18));
+}
+
+.astrology-promo span {
+  position: absolute;
+  left: clamp(18px, 4vw, 38px);
+  bottom: clamp(18px, 4vw, 34px);
+  z-index: 1;
+  display: grid;
+  gap: 8px;
+}
+
+.astrology-promo strong {
+  max-width: 560px;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.45rem, 3vw, 2.45rem);
+  line-height: 1.1;
+}
+
+.astrology-promo small {
+  width: fit-content;
+  padding: 9px 14px;
+  color: #ffffff;
+  background: var(--primary);
+  border-radius: 4px;
+  font-weight: 900;
+}
+
+.astrology-promo:hover img,
+.astrology-promo:focus-visible img {
+  transform: scale(1.04);
+}
+
 .booking-page,
 .contact-page {
   display: grid;
@@ -1092,6 +1438,33 @@ dd {
   list-style: none;
 }
 
+.detail-message-list {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.detail-message-list li {
+  position: relative;
+  padding: 12px 14px 12px 42px;
+  color: var(--text);
+  background: #fff8e9;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  line-height: 1.55;
+}
+
+.detail-message-list li::before {
+  content: 'ॐ';
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  color: var(--primary);
+  font-weight: 900;
+}
+
 .booking-form {
   display: grid;
   gap: 14px;
@@ -1212,8 +1585,11 @@ dd {
   }
 
   .hero-slide,
+  .astrology-hero,
+  .astro-form-grid,
   .detail-hero,
   .detail-content-layout,
+  .section-title-row,
   .booking-page,
   .contact-page,
   .quick-booking,
@@ -1239,7 +1615,7 @@ dd {
   }
 
   .quick-booking {
-    margin-top: -44px;
+    margin-top: -10px;
   }
 
   .slider-arrow {

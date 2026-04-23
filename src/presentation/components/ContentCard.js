@@ -1,7 +1,9 @@
 function ContentCard({ item, text, t, onDetails, onBook, actionLabel }) {
   return (
     <article className="content-card">
-      <img src={item.image} alt={text(item.title)} loading="lazy" />
+      <div className="card-image-wrap">
+        <img src={item.image} alt={text(item.title)} loading="lazy" />
+      </div>
       <div className="content-card-body">
         <h3>{text(item.title)}</h3>
         <p>{text(item.summary)}</p>
