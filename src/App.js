@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import AdminApp from './admin/AdminApp';
 import { useBookingFlow } from './application/hooks/useBookingFlow';
 import { useTranslation } from './application/hooks/useTranslation';
 import {
@@ -25,6 +26,7 @@ import './App.css';
 
 function App() {
   const { language, languages, setLanguage, t, text } = useTranslation();
+  const isAdminRoute = window.location.pathname.startsWith('/admin');
   const bookingFlow = useBookingFlow();
   const [currentPage, setCurrentPage] = useState('home');
   const [detailItem, setDetailItem] = useState(serviceCategories[0]);
@@ -71,6 +73,9 @@ function App() {
   };
 
   return (
+    isAdminRoute ? (
+      <AdminApp text={text} />
+    ) : (
     <div className="app-shell">
       <Header
         language={language}
@@ -167,6 +172,7 @@ function App() {
         <span>{t('confirmed')} | {t('followUp')} | {t('userConfirmation')}</span>
       </footer>
     </div>
+    )
   );
 }
 
