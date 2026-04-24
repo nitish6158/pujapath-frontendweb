@@ -7,11 +7,12 @@ import {
   videos,
 } from '../domain/content';
 import AdminLayout from './components/AdminLayout';
-import { adminContacts } from './data/adminData';
+import { adminContacts, adminFeaturedPosts } from './data/adminData';
 import { useAdminBookings } from './hooks/useAdminBookings';
 import AdminBookings from './pages/AdminBookings';
 import AdminContentList from './pages/AdminContentList';
 import AdminDashboard from './pages/AdminDashboard';
+import AdminFeaturedPosts from './pages/AdminFeaturedPosts';
 import AdminLogin from './pages/AdminLogin';
 import AdminSupport from './pages/AdminSupport';
 
@@ -46,6 +47,10 @@ function AdminApp({ text }) {
           selectedBooking={bookings.selectedBooking}
         />
       );
+    }
+
+    if (activePage === 'featured') {
+      return <AdminFeaturedPosts posts={adminFeaturedPosts} />;
     }
 
     if (activePage === 'services') {

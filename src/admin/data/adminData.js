@@ -75,6 +75,20 @@ export const adminContacts = [
   },
 ];
 
+export const adminFeaturedPosts = [
+  {
+    id: 'FP-101',
+    title: 'Tantra Badha Nivaran Sadhana',
+    note: 'Adesh Gurudev',
+    summary:
+      'Top white hero section for tantra badha nivaran guidance, spiritual support, and shanti-focused messaging on the home screen.',
+    price: '₹2,100 onwards',
+    image: 'Uploaded',
+    placement: 'Home Hero First Slide',
+    status: 'active',
+  },
+];
+
 export const adminStats = [
   { id: 'bookings', label: 'Total Bookings', value: '42' },
   { id: 'pending', label: 'Pending Requests', value: '11' },

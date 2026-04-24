@@ -2,6 +2,7 @@ function AdminLayout({ activePage, children, onLogout, onNavigate }) {
   const navItems = [
     ['dashboard', 'Dashboard'],
     ['bookings', 'Bookings'],
+    ['featured', 'Featured Posts'],
     ['services', 'Puja Services'],
     ['astrology', 'Astrology'],
     ['videos', 'Videos'],

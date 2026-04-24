@@ -66,6 +66,13 @@ export const translations = {
     sectionVideos: 'Videos and Upay',
     sectionBlogs: 'Blogs and Articles',
     sectionAbout: 'About Us',
+    sectionProtection: 'Tantra Badha Nivaran',
+    protectionSubtitle:
+      'For devotees and families seeking spiritual protection, shanti guidance, and calming remedial rituals during periods of fear, repeated negativity, or emotional unrest.',
+    protectionBannerTitle: 'तंत्र बाधा निवारण साधना',
+    protectionBannerText:
+      'यदि किसी को तंत्र बाधा, भय, बेचैनी या गहरी नकारात्मकता का अनुभव हो, तो गुरु मार्गदर्शन, संकल्प, साधना और शांति अनुष्ठान के माध्यम से निवारण हेतु आध्यात्मिक सहयोग प्राप्त करें।',
+    protectionBannerNote: 'Adesh Gurudev',
     viewDetails: 'View Details',
     bookNow: 'Book Now',
     enquiry: 'Enquiry',
@@ -164,6 +171,13 @@ export const translations = {
     sectionVideos: 'वीडियो और उपाय',
     sectionBlogs: 'ब्लॉग और लेख',
     sectionAbout: 'हमारे बारे में',
+    sectionProtection: 'तंत्र बाधा निवारण साधना',
+    protectionSubtitle:
+      'उन भक्तों और परिवारों के लिए जो भय, बार-बार नकारात्मकता या मानसिक अशांति के समय आध्यात्मिक सुरक्षा, शांति मार्गदर्शन और निवारण अनुष्ठान चाहते हैं।',
+    protectionBannerTitle: 'तंत्र बाधा निवारण साधना',
+    protectionBannerText:
+      'यदि किसी को तंत्र बाधा, भय, बेचैनी या गहरी नकारात्मकता का अनुभव हो, तो गुरु मार्गदर्शन, संकल्प, साधना और शांति अनुष्ठान के माध्यम से निवारण हेतु आध्यात्मिक सहयोग प्राप्त करें।',
+    protectionBannerNote: 'आदेश गुरुदेव',
     viewDetails: 'विवरण देखें',
     bookNow: 'अभी बुक करें',
     enquiry: 'पूछताछ',
@@ -203,6 +217,24 @@ export const translations = {
 };
 
 export const heroSlides = [
+  {
+    id: 'tantra-badha-nivaran',
+    eyebrow: {
+      en: 'Adesh Gurudev',
+      hi: 'आदेश गुरुदेव',
+    },
+    title: {
+      en: 'Tantra Badha Nivaran Sadhana',
+      hi: 'तंत्र बाधा निवारण साधना',
+    },
+    summary: {
+      en: 'If someone is facing deep fear, negative energy, spiritual unrest, or tantra-related distress, seek calm guidance, sankalp, and spiritual support through remedial sadhana and shanti rituals.',
+      hi: 'यदि किसी को तंत्र बाधा, भय, बेचैनी या गहरी नकारात्मकता का अनुभव हो, तो गुरु मार्गदर्शन, संकल्प, साधना और शांति अनुष्ठान के माध्यम से आध्यात्मिक सहयोग प्राप्त करें।',
+    },
+    image: 'https://commons.wikimedia.org/wiki/Special:FilePath/Aghori%20Sadhu%20in%20Varanasi.jpg',
+    accent: '',
+    theme: 'light',
+  },
   {
     id: 'ganesh-puja',
     eyebrow: {
@@ -583,6 +615,84 @@ export const astrologyServices = [
     benefits: {
       en: ['Tithi guidance', 'Nakshatra review', 'Personal muhurat'],
       hi: ['तिथि मार्गदर्शन', 'नक्षत्र समीक्षा', 'व्यक्तिगत मुहूर्त'],
+    },
+  },
+];
+
+export const protectionServices = [
+  {
+    id: 'spiritual-protection-guidance',
+    image:
+      'https://commons.wikimedia.org/wiki/Special:FilePath/%28A%29%20puja%20fire%2C%20Havanam.jpg',
+    title: { en: 'Spiritual Protection Guidance', hi: 'आध्यात्मिक सुरक्षा मार्गदर्शन' },
+    summary: {
+      en: 'For devotees seeking calm guidance during periods of fear, heaviness, repeated obstacles, or a strong sense of negativity around home and life.',
+      hi: 'उन भक्तों के लिए जो भय, भारीपन, बार-बार बाधाओं या घर और जीवन में नकारात्मकता की अनुभूति के समय शांत आध्यात्मिक मार्गदर्शन चाहते हैं।',
+    },
+    description: {
+      en: 'This consultation focuses on devotional protection practices, sankalp-based guidance, and suitable shanti rituals. It is designed for families who want spiritual support, clarity, and a disciplined path of prayer rather than panic or superstition.',
+      hi: 'यह परामर्श भक्तिमय सुरक्षा उपायों, संकल्प-आधारित मार्गदर्शन और उपयुक्त शांति अनुष्ठानों पर केंद्रित है। यह उन परिवारों के लिए है जो घबराहट या अंधविश्वास के बजाय आध्यात्मिक सहयोग, स्पष्टता और अनुशासित प्रार्थना मार्ग चाहते हैं।',
+    },
+    price: '₹1,499',
+    duration: { en: '30 to 40 minutes', hi: '30 से 40 मिनट' },
+    location: { en: 'Online or phone', hi: 'ऑनलाइन या फोन' },
+    benefits: {
+      en: ['Calm guidance', 'Sankalp support', 'Suggested devotional routine'],
+      hi: ['शांत मार्गदर्शन', 'संकल्प सहयोग', 'भक्तिमय दिनचर्या सुझाव'],
+    },
+    detailMessages: {
+      en: ['The focus is on spiritual support and traditional remedies.', 'Families can describe sleep issues, fear, restlessness, or repeated obstacles in the message.', 'Pandit ji may suggest prayer, path, havan, or temple visit depending on the situation.'],
+      hi: ['इस सेवा का केंद्र आध्यात्मिक सहयोग और पारंपरिक उपाय हैं।', 'परिवार संदेश में नींद की समस्या, भय, बेचैनी या बार-बार बाधाओं के बारे में बता सकते हैं।', 'स्थिति के अनुसार पंडित जी प्रार्थना, पाठ, हवन या मंदिर दर्शन सुझा सकते हैं।'],
+    },
+  },
+  {
+    id: 'nazar-dosh-shanti',
+    image:
+      'https://commons.wikimedia.org/wiki/Special:FilePath/Pooja%20and%20Havan%20Kund%201.jpg',
+    title: { en: 'Nazar Dosh Shanti Puja', hi: 'नज़र दोष शांति पूजा' },
+    summary: {
+      en: 'A traditional shanti ritual often requested when a family feels sudden unrest, repeated disturbances, or a sense of heavy negative attention.',
+      hi: 'यह पारंपरिक शांति पूजा तब कराई जाती है जब परिवार अचानक अशांति, बार-बार रुकावट या भारी नकारात्मक प्रभाव जैसा अनुभव करता है।',
+    },
+    description: {
+      en: 'Nazar Dosh Shanti Puja is arranged with sankalp, mantra, and simple protective rituals intended to bring peace and steadiness to the home. It is framed as a devotional remedy rooted in prayer, not fear.',
+      hi: 'नज़र दोष शांति पूजा संकल्प, मंत्र और सरल सुरक्षा विधियों के साथ कराई जाती है ताकि घर में शांति और स्थिरता आए। यह भय नहीं, बल्कि प्रार्थना-आधारित भक्तिमय उपाय के रूप में की जाती है।',
+    },
+    price: '₹2,100',
+    duration: { en: '90 minutes', hi: '90 मिनट' },
+    location: { en: 'Home or temple', hi: 'घर या मंदिर' },
+    benefits: {
+      en: ['Peaceful home feeling', 'Protective prayer support', 'Simple remedy guidance'],
+      hi: ['घर में शांति की अनुभूति', 'सुरक्षात्मक प्रार्थना सहयोग', 'सरल उपाय मार्गदर्शन'],
+    },
+    detailMessages: {
+      en: ['Suitable for families seeking a calm shanti ritual.', 'Home-related concerns can be mentioned before booking.', 'Pandit ji will guide simple samagri if needed.'],
+      hi: ['यह सेवा शांत शांति अनुष्ठान चाहने वाले परिवारों के लिए उपयुक्त है।', 'घर से जुड़ी चिंता बुकिंग से पहले बताई जा सकती है।', 'आवश्यक होने पर पंडित जी सरल सामग्री बताएंगे।'],
+    },
+  },
+  {
+    id: 'hanuman-raksha-path',
+    image:
+      'https://commons.wikimedia.org/wiki/Special:FilePath/Hanuman_Temple%2C_Delhi.jpg',
+    title: { en: 'Hanuman Raksha Path', hi: 'हनुमान रक्षा पाठ' },
+    summary: {
+      en: 'A devotional protection path for courage, steadiness, and inner strength when someone feels deeply unsettled or mentally burdened.',
+      hi: 'यह भक्तिमय रक्षा पाठ साहस, स्थिरता और आंतरिक शक्ति के लिए कराया जाता है जब कोई व्यक्ति गहरी बेचैनी या मानसिक दबाव महसूस करता है।',
+    },
+    description: {
+      en: 'Hanuman Raksha Path is meant for spiritual confidence, protective prayer, and devotional discipline. Many families request it during difficult periods to feel supported through bhakti and sankalp.',
+      hi: 'हनुमान रक्षा पाठ आध्यात्मिक आत्मविश्वास, सुरक्षात्मक प्रार्थना और भक्तिमय अनुशासन के लिए कराया जाता है। कठिन समय में कई परिवार भक्ति और संकल्प के माध्यम से सहयोग पाने के लिए यह सेवा लेते हैं।',
+    },
+    price: '₹1,899',
+    duration: { en: '1 to 2 hours', hi: '1 से 2 घंटे' },
+    location: { en: 'Online or temple path', hi: 'ऑनलाइन या मंदिर पाठ' },
+    benefits: {
+      en: ['Protective devotion', 'Mental steadiness', 'Prayer-focused support'],
+      hi: ['सुरक्षात्मक भक्ति', 'मानसिक स्थिरता', 'प्रार्थना-आधारित सहयोग'],
+    },
+    detailMessages: {
+      en: ['Ideal for devotees drawn to Hanuman bhakti.', 'Can be booked online with sankalp in the devotee’s name.', 'Suitable as a spiritual support practice alongside practical care and family support.'],
+      hi: ['हनुमान भक्ति से जुड़े भक्तों के लिए उपयुक्त।', 'भक्त के नाम से संकल्प लेकर यह ऑनलाइन भी कराया जा सकता है।', 'यह व्यावहारिक देखभाल और पारिवारिक सहयोग के साथ आध्यात्मिक समर्थन के रूप में उपयुक्त है।'],
     },
   },
 ];

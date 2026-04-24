@@ -1,6 +1,7 @@
 import { useSlider } from '../../application/hooks/useSlider';
 import { useState } from 'react';
 import BlogCard from '../components/BlogCard';
+import ContentCard from '../components/ContentCard';
 import PujaServicesSection from '../components/PujaServicesSection';
 import SectionHeader from '../components/SectionHeader';
 import VideoCard from '../components/VideoCard';
@@ -14,6 +15,7 @@ function HomePage({
   onBook,
   onDetails,
   onNavigate,
+  protectionServices,
   services,
   t,
   text,
@@ -27,7 +29,7 @@ function HomePage({
 
   return (
     <>
-      <section className="hero" id="home">
+      <section className={`hero ${activeSlide.theme === 'light' ? 'hero-light' : ''}`} id="home">
         <button
           className="slider-arrow slider-arrow-left"
           type="button"
@@ -39,9 +41,11 @@ function HomePage({
 
         <div className="hero-slide" key={activeSlide.id}>
           <div className="hero-content">
-            <span className="hero-symbol" aria-hidden="true">
-              {activeSlide.accent}
-            </span>
+            {activeSlide.accent ? (
+              <span className="hero-symbol" aria-hidden="true">
+                {activeSlide.accent}
+              </span>
+            ) : null}
             <p className="eyebrow">{text(activeSlide.eyebrow)}</p>
             <h1>{text(activeSlide.title)}</h1>
             <p>{text(activeSlide.summary)}</p>
@@ -61,7 +65,7 @@ function HomePage({
             </div>
           </div>
 
-          <div className="hero-figure">
+          <div className={`hero-figure ${activeSlide.theme === 'light' ? 'hero-figure-photo' : ''}`}>
             {activeSlide.embedUrl ? (
               <iframe
                 title={text(activeSlide.title)}
@@ -108,6 +112,22 @@ function HomePage({
             </button>
           </article>
         ))}
+      </section>
+
+      <section className="page-section soft-band">
+        <SectionHeader title={t('sectionProtection')}>{t('protectionSubtitle')}</SectionHeader>
+        <div className="card-grid">
+          {protectionServices.map((service) => (
+            <ContentCard
+              key={service.id}
+              item={service}
+              onDetails={onDetails}
+              onBook={(item) => onBook(item, 'protection')}
+              t={t}
+              text={text}
+            />
+          ))}
+        </div>
       </section>
 
       <PujaServicesSection

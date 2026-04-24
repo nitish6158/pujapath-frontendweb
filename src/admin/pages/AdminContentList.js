@@ -8,6 +8,7 @@ function AdminContentList({ items, pageType, title, text }) {
       label: 'Summary',
       render: (row) => text(row.summary || row.eyebrow || row.category || { en: '-' }),
     },
+    { key: 'price', label: 'Price', render: (row) => row.price || '-' },
     { key: 'image', label: 'Image', render: (row) => (row.image ? 'Uploaded' : '-') },
   ];
 
@@ -27,6 +28,10 @@ function AdminContentList({ items, pageType, title, text }) {
           <label>
             <span>Title</span>
             <input placeholder={`Add ${pageType} title`} />
+          </label>
+          <label>
+            <span>Price</span>
+            <input placeholder="Enter price" />
           </label>
           <label>
             <span>Image Upload</span>

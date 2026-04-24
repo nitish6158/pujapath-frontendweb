@@ -95,6 +95,13 @@ function AdminBookings({
             />
           </label>
           <label>
+            <span>Price</span>
+            <input
+              value={selectedBooking.amount}
+              onChange={(event) => onUpdateBooking(selectedBooking.id, { amount: event.target.value })}
+            />
+          </label>
+          <label>
             <span>Status</span>
             <select
               value={selectedBooking.status}

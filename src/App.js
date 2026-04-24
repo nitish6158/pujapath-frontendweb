@@ -10,6 +10,7 @@ import {
   blogs,
   bookingHighlights,
   heroSlides,
+  protectionServices,
   serviceCategories,
   videos,
 } from './domain/content';
@@ -33,7 +34,7 @@ function App() {
   const [submitMessage, setSubmitMessage] = useState('');
 
   const allBookableItems = useMemo(
-    () => [...serviceCategories, ...astrologyServices, ...videos, ...blogs],
+    () => [...serviceCategories, ...protectionServices, ...astrologyServices, ...videos, ...blogs],
     []
   );
 
@@ -95,6 +96,7 @@ function App() {
             onBook={startBooking}
             onDetails={showDetails}
             onNavigate={(target) => (target === 'booking' ? startBooking() : navigateTo(target))}
+            protectionServices={protectionServices}
             services={serviceCategories}
             videos={videos}
             {...commonPageProps}
