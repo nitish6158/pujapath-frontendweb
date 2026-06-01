@@ -2,8 +2,10 @@ import AdminTable from '../components/AdminTable';
 import { bookingStatusOptions } from '../data/adminData';
 
 function AdminBookings({
+  error,
   filteredBookings,
   filters,
+  loading,
   onSelectBooking,
   onUpdateBooking,
   onUpdateFilter,
@@ -46,6 +48,9 @@ function AdminBookings({
             ))}
           </select>
         </div>
+
+        {loading ? <p className="admin-helper-text">Loading bookings...</p> : null}
+        {error ? <p className="admin-error">{error}</p> : null}
 
         <AdminTable
           columns={columns}

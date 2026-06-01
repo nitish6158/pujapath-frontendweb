@@ -1,19 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import AdminApp from './admin/AdminApp';
+import { usePublicContent } from './application/hooks/usePublicContent';
 import { useBookingFlow } from './application/hooks/useBookingFlow';
 import { useTranslation } from './application/hooks/useTranslation';
-import {
-  astrologyServices,
-  astrologyExperts,
-  astrologyFlow,
-  astrologyTopics,
-  blogs,
-  bookingHighlights,
-  heroSlides,
-  protectionServices,
-  serviceCategories,
-  videos,
-} from './domain/content';
+import { pujaPathApi } from './infrastructure/api/pujaPathApi';
 import Header from './presentation/components/Header';
 import AstrologyPage from './presentation/pages/AstrologyPage';
 import BlogsPage from './presentation/pages/BlogsPage';
@@ -29,14 +19,27 @@ function App() {
   const { language, languages, setLanguage, t, text } = useTranslation();
   const isAdminRoute = window.location.pathname.startsWith('/admin');
   const bookingFlow = useBookingFlow();
+  const content = usePublicContent();
   const [currentPage, setCurrentPage] = useState('home');
-  const [detailItem, setDetailItem] = useState(serviceCategories[0]);
+  const [detailItem, setDetailItem] = useState(null);
   const [submitMessage, setSubmitMessage] = useState('');
 
   const allBookableItems = useMemo(
-    () => [...serviceCategories, ...protectionServices, ...astrologyServices, ...videos, ...blogs],
-    []
+    () => [
+      ...content.services,
+      ...content.protectionServices,
+      ...content.astrologyServices,
+      ...content.videos,
+      ...content.blogs,
+    ],
+    [content.astrologyServices, content.blogs, content.protectionServices, content.services, content.videos],
   );
+
+  useEffect(() => {
+    if (!detailItem && content.services.length) {
+      setDetailItem(content.services[0]);
+    }
+  }, [content.services, detailItem]);
 
   const navigateTo = (target) => {
     setCurrentPage(target);
@@ -56,7 +59,15 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const submitBooking = (event) => {
+  const bookingTypeMap = {
+    astrology: 'Astrology',
+    blog: 'Blog',
+    protection: 'Puja',
+    service: 'Puja',
+    video: 'Video',
+  };
+
+  const submitBooking = async (event) => {
     event.preventDefault();
     const result = bookingFlow.submitBooking();
 
@@ -65,7 +76,32 @@ function App() {
       return;
     }
 
-    setSubmitMessage(`${t('bookingPending')}. ${t('adminNotice')}`);
+    try {
+      await pujaPathApi.createBooking({
+        ...result.request,
+        type: bookingTypeMap[bookingFlow.selectedItem?.type] || 'General',
+      });
+      setSubmitMessage(`${t('bookingPending')}. ${t('adminNotice')}`);
+    } catch (requestError) {
+      setSubmitMessage(requestError.message || 'Unable to submit booking right now.');
+    }
+  };
+
+  const submitContact = async (event) => {
+    event.preventDefault();
+
+    try {
+      await pujaPathApi.createContact({
+        name: bookingFlow.booking.name,
+        mobile: bookingFlow.booking.mobile,
+        city: bookingFlow.booking.city,
+        message: bookingFlow.booking.message,
+        subject: 'Contact Enquiry',
+      });
+      setSubmitMessage(t('adminNotice'));
+    } catch (requestError) {
+      setSubmitMessage(requestError.message || 'Unable to submit contact enquiry right now.');
+    }
   };
 
   const commonPageProps = {
@@ -87,18 +123,20 @@ function App() {
       />
 
       <main>
+        {content.error ? <p className="app-notice">{content.error}</p> : null}
+
         {currentPage === 'home' ? (
           <HomePage
-            astrologyServices={astrologyServices}
-            blogs={blogs}
-            bookingHighlights={bookingHighlights}
-            heroSlides={heroSlides}
+            astrologyServices={content.astrologyServices}
+            blogs={content.blogs}
+            bookingHighlights={content.bookingHighlights}
+            heroSlides={content.heroSlides}
             onBook={startBooking}
             onDetails={showDetails}
             onNavigate={(target) => (target === 'booking' ? startBooking() : navigateTo(target))}
-            protectionServices={protectionServices}
-            services={serviceCategories}
-            videos={videos}
+            protectionServices={content.protectionServices}
+            services={content.services}
+            videos={content.videos}
             {...commonPageProps}
           />
         ) : null}
@@ -107,17 +145,17 @@ function App() {
           <ServicesPage
             onBook={startBooking}
             onDetails={showDetails}
-            services={serviceCategories}
+            services={content.services}
             {...commonPageProps}
           />
         ) : null}
 
         {currentPage === 'astrology' ? (
           <AstrologyPage
-            astrologyServices={astrologyServices}
-            astrologyExperts={astrologyExperts}
-            astrologyFlow={astrologyFlow}
-            astrologyTopics={astrologyTopics}
+            astrologyServices={content.astrologyServices}
+            astrologyExperts={content.astrologyExperts}
+            astrologyFlow={content.astrologyFlow}
+            astrologyTopics={content.astrologyTopics}
             onBook={startBooking}
             onDetails={showDetails}
             {...commonPageProps}
@@ -127,13 +165,13 @@ function App() {
         {currentPage === 'videos' ? (
           <VideosPage
             onBook={startBooking}
-            videos={videos}
+            videos={content.videos}
             {...commonPageProps}
           />
         ) : null}
 
         {currentPage === 'blogs' ? (
-          <BlogsPage blogs={blogs} onBook={startBooking} {...commonPageProps} />
+          <BlogsPage blogs={content.blogs} onBook={startBooking} {...commonPageProps} />
         ) : null}
 
         {currentPage === 'details' ? (
@@ -161,7 +199,7 @@ function App() {
           <ContactPage
             booking={bookingFlow.booking}
             onChange={bookingFlow.updateBooking}
-            onSubmit={submitBooking}
+            onSubmit={submitContact}
             submitMessage={submitMessage}
             t={t}
           />

@@ -3,6 +3,15 @@ function ServiceDetailPage({ item, onBack, onBook, t, text }) {
     return null;
   }
 
+  const bookingTypeMap = {
+    'astrology-service': 'astrology',
+    blog: 'blog',
+    'protection-service': 'protection',
+    service: 'service',
+    video: 'video',
+  };
+  const bookingType = bookingTypeMap[item.type] || 'service';
+
   const whatYouGet = [
     t('livePuja'),
     t('vedaPandits'),
@@ -21,7 +30,7 @@ function ServiceDetailPage({ item, onBack, onBook, t, text }) {
           <p className="eyebrow">{t('sectionServices')}</p>
           <h1>{text(item.title)}</h1>
           <p>{text(item.summary)}</p>
-          <button className="primary-button" type="button" onClick={() => onBook(item)}>
+          <button className="primary-button" type="button" onClick={() => onBook(item, bookingType)}>
             {t('bookPujaNow')}
           </button>
         </div>
@@ -89,7 +98,7 @@ function ServiceDetailPage({ item, onBack, onBook, t, text }) {
                 <dd>{item.price}</dd>
               </div>
             </dl>
-            <button className="primary-button full-width" type="button" onClick={() => onBook(item)}>
+            <button className="primary-button full-width" type="button" onClick={() => onBook(item, bookingType)}>
               {t('bookPujaNow')}
             </button>
           </div>
@@ -99,7 +108,7 @@ function ServiceDetailPage({ item, onBack, onBook, t, text }) {
             <input aria-label={t('name')} placeholder={t('name')} />
             <input aria-label={t('mobile')} placeholder={t('mobile')} type="tel" />
             <textarea aria-label={t('message')} placeholder={t('enterMessage')} rows="4" />
-            <button className="primary-button full-width" type="button" onClick={() => onBook(item)}>
+            <button className="primary-button full-width" type="button" onClick={() => onBook(item, bookingType)}>
               {t('submit')}
             </button>
           </form>

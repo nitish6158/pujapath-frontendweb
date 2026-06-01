@@ -56,7 +56,7 @@ function HomePage({
                 </button>
               ) : (
                 <button className="primary-button" type="button" onClick={() => onNavigate('services')}>
-                  {t('knowMore')}
+                  {text(activeSlide.ctaLabel) || activeSlide.ctaLabel || t('knowMore')}
                 </button>
               )}
               <button className="secondary-button" type="button" onClick={() => onNavigate('booking')}>

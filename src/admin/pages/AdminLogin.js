@@ -1,23 +1,15 @@
 import { useState } from 'react';
-import { adminCredentials } from '../data/adminData';
 
-function AdminLogin({ onLogin }) {
+function AdminLogin({ error, loading, onLogin }) {
   const [form, setForm] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
 
   const updateField = (field, value) => {
     setForm((currentForm) => ({ ...currentForm, [field]: value }));
   };
 
-  const submit = (event) => {
+  const submit = async (event) => {
     event.preventDefault();
-
-    if (form.email === adminCredentials.email && form.password === adminCredentials.password) {
-      onLogin();
-      return;
-    }
-
-    setError('Invalid credentials. Use admin@pujapath.com / admin123 for design preview.');
+    await onLogin(form);
   };
 
   return (
@@ -31,7 +23,7 @@ function AdminLogin({ onLogin }) {
           <input
             type="email"
             value={form.email}
-            placeholder={adminCredentials.email}
+            placeholder="admin@pujapath.com"
             onChange={(event) => updateField('email', event.target.value)}
           />
         </label>
@@ -40,12 +32,12 @@ function AdminLogin({ onLogin }) {
           <input
             type="password"
             value={form.password}
-            placeholder={adminCredentials.password}
+            placeholder="admin123"
             onChange={(event) => updateField('password', event.target.value)}
           />
         </label>
         <button className="admin-primary-button" type="submit">
-          Login
+          {loading ? 'Logging in...' : 'Login'}
         </button>
         {error ? <p className="admin-error">{error}</p> : null}
       </form>

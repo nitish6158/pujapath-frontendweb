@@ -1,18 +1,19 @@
-import { adminStats } from '../data/adminData';
-
-function AdminDashboard({ bookings, contacts, onNavigate }) {
+function AdminDashboard({ bookings, contacts, error, loading, onNavigate, stats }) {
   const pendingBookings = bookings.filter((booking) => booking.status === 'pending').slice(0, 4);
 
   return (
     <section className="admin-page">
       <div className="admin-stat-grid">
-        {adminStats.map((stat) => (
+        {stats.map((stat) => (
           <article className="admin-stat-card" key={stat.id}>
             <span>{stat.label}</span>
             <strong>{stat.value}</strong>
           </article>
         ))}
       </div>
+
+      {loading ? <p className="admin-helper-text">Loading dashboard...</p> : null}
+      {error ? <p className="admin-error">{error}</p> : null}
 
       <div className="admin-grid-two">
         <article className="admin-panel">
